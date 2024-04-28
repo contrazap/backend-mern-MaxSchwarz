@@ -25,6 +25,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("Backend API");
+});
 app.use("/api/places", placesRoutes);
 app.use("/api/users", usersRoutes);
 
