@@ -1,0 +1,9 @@
+{
+  "env": {
+    "DB_USER": "contrazap",
+    "DB_PASSWORD": "test",
+    "DB_NAME": "mern",
+    "GOOGLE_API_KEY": "AIzaSyDqp99FRUF_WS7xChGFDamLSSiNtUJmKO8",
+    "JWT_KEY": "supersecret_dont_share"
+  }
+}
