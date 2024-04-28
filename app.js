@@ -49,12 +49,18 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message } || "An unknown error occurred!");
 });
 
+console.log("DB_USER", process.env.DB_USER);
+console.log("DB_PASSWORD", process.env.DB_PASSWORD);
+console.log("DB_NAME", process.env.DB_NAME);
+
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.gubop3z.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`
   )
   .then(() => {
-    app.listen(process.env.PORT || 5000);
+    app.listen(process.env.PORT || 5000, () => {
+      `Server running on port: ${process.env.PORT || 5000}`;
+    });
   })
   .catch((err) => {
     console.log(err);
