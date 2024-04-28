@@ -37,14 +37,17 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  const { name, email, password } = req.body;
+  const { name, email, password, imageUrl } = req.body;
 
   let existingUser;
 
   try {
     existingUser = await User.findOne({ email });
   } catch (err) {
-    const error = new HttpError("Something went wrong. Signup failed.", 500);
+    const error = new HttpError(
+      "Something went wrong. No user found. Signup failed.",
+      500
+    );
     return next(error);
   }
 
@@ -71,14 +74,17 @@ const signup = async (req, res, next) => {
     name,
     email,
     password: hashedPassword,
-    image: req.file.path,
+    imageUrl,
     places: [],
   });
 
   try {
     await createdUser.save();
   } catch (err) {
-    const error = new HttpError("Something went wrong. Signup failed.", 500);
+    const error = new HttpError(
+      "Something went wrong. User save failed. Signup failed.",
+      500
+    );
     return next(error);
   }
 

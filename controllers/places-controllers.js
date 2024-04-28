@@ -90,7 +90,7 @@ const createPlace = async (req, res, next) => {
     return next(error);
   }
 
-  const { title, description, address } = req.body;
+  const { title, description, address, imageUrl } = req.body;
 
   let coordinates;
   try {
@@ -103,7 +103,7 @@ const createPlace = async (req, res, next) => {
   const createdPlace = new Place({
     title,
     description,
-    image: req.file.path,
+    imageUrl,
     address,
     location: coordinates,
     creator: req.userData.userId,
@@ -222,7 +222,7 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
-  const imagePath = place.image;
+  // const imagePath = place.image;
 
   try {
     const sess = await mongoose.startSession();
@@ -239,13 +239,13 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
-  if (imagePath) {
-    fs.unlink(imagePath, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }
+  // if (imagePath) {
+  //   fs.unlink(imagePath, (err) => {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //   });
+  // }
 
   res
     .status(200)
